@@ -1,0 +1,14 @@
+
+name: Pull request checks
+
+on:
+  pull_request:
+    branches: [develop]
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Check CHANGELOG.md
+        run: env | sort
