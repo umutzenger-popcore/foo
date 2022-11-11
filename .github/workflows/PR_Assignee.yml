@@ -2,15 +2,16 @@ name: Pull request checks
 
 on: pull_request
 
-permissions: write-all
-
-env:
-  pat: ${{ secrets.PAT }}
-
 jobs:
-  example-job:
+  logLatestRelease:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign
-        run: |
-          curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/${GITHUB_REPOSITORY}/assignees
+      - uses: octokit/request-action@v2.x
+        id: get_latest_release
+        with:
+          route: GET /repos/{owner}/{repo}/assignees
+          owner: umutzenger-popcore
+          repo: foo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo latest release: ${{ steps.get_latest_release.outputs.data }}"
