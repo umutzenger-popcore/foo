@@ -9,9 +9,8 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: get_latest_release
         with:
-          route: POST /repos/{owner}/{repo}/issues/1/assignees
-          owner: umutzenger-popcore
-          repo: foo
+          route: POST /repos/{repo}/issues/1/assignees
+          repo: ${{ github.repository }}
           assignees: "umutzenger-popcore"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
