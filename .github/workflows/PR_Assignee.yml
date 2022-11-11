@@ -13,7 +13,4 @@ jobs:
     steps:
       - name: Assign
         run: |
-          curl \
-          -H "Accept: application/vnd.github+json" \
-          -H "Authorization: Bearer ${GITHUB_TOKEN" \
-          https://api.github.com/repos/OWNER/REPO/assignees
+          curl -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" https://api.github.com/repos/${GITHUB_REPOSITORY}/assignees
