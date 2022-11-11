@@ -9,9 +9,10 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: get_latest_release
         with:
-          route: GET /repos/{owner}/{repo}/assignees
+          route: POST /repos/{owner}/{repo}/issues/1/assignees
           owner: umutzenger-popcore
           repo: foo
+          assignees: ["umutzenger-popcore"]
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: "echo latest release: ${{ steps.get_latest_release.outputs.data }}"
