@@ -2,6 +2,8 @@ name: Pull request checks
 
 on: pull_request
 
+permissions: write-all
+
 env:
   pat: ${{ secrets.PAT }}
 
@@ -15,4 +17,4 @@ jobs:
           echo ${GITHUB_TRIGGERING_ACTOR}
           echo "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/1/assignees"
           echo "{\"assignees\":[\"${GITHUB_TRIGGERING_ACTOR}\"]}"
-          curl -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${pat}" "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/1/assignees" -d "{\"assignees\":[\"${GITHUB_TRIGGERING_ACTOR}\"]}"
+          curl -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer ${GITHUB_TOKEN}" "https://api.github.com/repos/${GITHUB_REPOSITORY}/issues/1/assignees" -d "{\"assignees\":[\"${GITHUB_TRIGGERING_ACTOR}\"]}"
